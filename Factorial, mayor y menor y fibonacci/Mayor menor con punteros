@@ -1,0 +1,76 @@
+#include <stdio.h>
+typedef int (*operacion)(int,int);
+
+
+
+struct Pares{
+    int a;
+    int b;
+    operacion operador_entre_elemtos;
+};
+
+
+
+
+int menor(int v1, int v2){
+    if(v1 < v2){
+        return v1;
+    }else
+    {
+        return v2;
+    }
+}
+
+
+
+int mayor(int v, int v2){
+    return v1 > v2 ? v1 : v2;
+}
+
+
+
+int suma(int v1, int v2){
+    return v1 + v2;
+}
+
+
+
+int ejecutar_operacion(struct Pares *tupla){
+    return tupla->operador_entre_elemtos(tupla->a, tupla->b);
+}
+
+
+
+int main(){
+    struct Pares listado_tuplas[3];
+
+
+
+    listado_tuplas[0].a = 10;
+    listado_tuplas[0].b = 12;
+    listado_tuplas[0].operador_entre_elemtos = menor;
+
+
+
+    listado_tuplas[1].a = 1;
+    listado_tuplas[1].b = 120;
+    listado_tuplas[1].operador_entre_elemtos = mayor;
+
+
+
+    listado_tuplas[2].a = 45;
+    listado_tuplas[2].b = 56;
+    listado_tuplas[2].operador_entre_elemtos = suma;
+
+
+
+
+    for(int i = 0; i < 3; i++){
+        int resultado = ejecutar_operacion(&listado_tuplas[i]);
+        printf("resultado %d = %d \n", i, resultado);
+    }
+
+
+
+    return 0;
+}
